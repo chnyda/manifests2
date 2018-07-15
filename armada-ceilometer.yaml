@@ -1,0 +1,320 @@
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: helm-toolkit
+data:
+  chart_name: helm-toolkit
+  release: helm-toolkit
+  namespace: helm-toolkit
+  values: {}
+  source:
+    type: local
+    location: /home/ubuntu/openstack-helm-infra
+    subpath: helm-toolkit
+    reference: master
+  dependencies: []
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: postgresql
+data:
+  chart_name: postgresql
+  release: postgresql
+  namespace: openstack
+  wait:
+    timeout: 1800
+    labels:
+      release_group: postgresql
+  install:
+    no_hooks: False
+  upgrade:
+    no_hooks: False
+  values:
+    pod:
+      replicas:
+        server: 1
+    endpoints:
+      postgresql:
+        auth:
+          admin:
+            password: password
+        volume:
+          enabled: false
+        labels:
+          server:
+            node_selector_key: openstack-control-plane
+            node_selector_value: enabled
+  source:
+    type: local
+    location: /home/ubuntu/openstack-helm/
+    subpath: postgresql
+    reference: master
+  dependencies:
+    - helm-toolkit
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: gnocchi
+data:
+  chart_name: gnocchi
+  release: gnocchi
+  namespace: openstack
+  wait:
+    timeout: 1800
+    labels:
+      release_group: gnocchi
+  install:
+    no_hooks: False
+  upgrade:
+    no_hooks: False
+  values:
+    images:
+      pull_policy: "IfNotPresent"
+    pod:
+      replicas:
+        server: 1
+    endpoints:
+      oslo_db_postgresql:
+        auth:
+          admin:
+            password: password
+          gnocchi:
+            password: password
+      oslo_db:
+        auth:
+          admin:
+            password: password
+          gnocchi:
+            password: password
+        volume:
+          enabled: false
+        labels:
+           api:
+             node_selector_key: openstack-control-plane
+             node_selector_value: enabled
+           job:
+             node_selector_key: openstack-control-plane
+             node_selector_value: enabled
+           metricd:
+             node_selector_key: openstack-control-plane
+             node_selector_value: enabled
+           statsd:
+             node_selector_key: openstack-control-plane
+             node_selector_value: enabled
+           test:
+             node_selector_key: openstack-control-plane
+             node_selector_value: enabled
+  source:
+    type: local
+    location: /home/ubuntu/openstack-helm/
+    subpath: gnocchi
+    reference: master
+  dependencies:
+    - helm-toolkit
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: mongodb
+data:
+  chart_name: mongodb
+  release: mongodb
+  namespace: openstack
+  wait:   
+    timeout: 1800
+    labels:
+      release_group: mongodb
+  install:
+    no_hooks: False
+  upgrade:   
+    no_hooks: False
+  values:
+    pod:
+      replicas:
+        server: 1
+    endpoints: 
+      mongodb:
+        auth:
+          admin:
+            password: password
+    labels:
+      server:
+        node_selector_key: openstack-control-plane
+        node_selector_value: enabled
+  source:
+    type: local
+    location: /home/ubuntu/openstack-helm/
+    subpath: mongodb
+    reference: master
+  dependencies:
+    - helm-toolkit
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: ceilometer-rabbitmq
+data:
+  chart_name: ceilometer-rabbitmq
+  release: ceilometer-rabbitmq
+  namespace: openstack
+  wait:
+    timeout: 1800
+    labels:
+      release_group: ceilometer-rabbitmq
+  install:
+    no_hooks: False
+  upgrade:
+    no_hooks: False
+  values:
+    endpoints:
+      oslo_messaging:
+        auth:
+          user:
+            username: ceilometer-rabbitmq-admin
+            password: password 
+        hosts:
+          default: ceilometer-rabbitmq
+      prometheus_rabbitmq_exporter:
+        hosts:
+          default: ceilometer-rabbitmq-exporter
+    monitoring:
+      prometheus:
+        enabled: True
+    labels:
+      server:
+        node_selector_key: openstack-control-plane
+        node_selector_value: enabled
+      prometheus_rabbitmq_exporter:
+        node_selector_key: openstack-control-plane
+        node_selector_value: enabled
+  source:
+    type: local
+    location: /home/ubuntu/openstack-helm/
+    subpath: rabbitmq
+    reference: master
+  dependencies:
+    - helm-toolkit
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: ceilometer
+data:
+  chart_name: ceilometer
+  release: ceilometer
+  namespace: openstack
+  wait:
+    timeout: 1800
+    labels:
+      release_group: ceilometer
+  install:
+    no_hooks: False
+  upgrade:
+    no_hooks: False
+  values:
+    images:
+      pull_policy: "IfNotPresent"
+#      tags:
+#        test: docker.io/kolla/ubuntu-binary-rally:4.0.0
+#        db_init_mongodb: docker.io/mongo:3.4.9-jessie
+#        db_init: docker.io/kolla/ubuntu-source-ceilometer-api:ocata
+#        ceilometer_db_sync: docker.io/kolla/ubuntu-source-ceilometer-api:ocata
+#        rabbit_init: docker.io/rabbitmq:3.7-management
+#        ks_user: docker.io/openstackhelm/heat:ocata
+#        ks_service: docker.io/openstackhelm/heat:ocata
+#        ks_endpoints: docker.io/openstackhelm/heat:ocata
+#        ceilometer_api: docker.io/kolla/ubuntu-source-ceilometer-api:ocata
+#        ceilometer_central: docker.io/kolla/ubuntu-source-ceilometer-central:ocata
+#        ceilometer_collector: docker.io/kolla/ubuntu-source-ceilometer-collector:ocata
+#        ceilometer_compute: docker.io/kolla/ubuntu-source-ceilometer-compute:ocata
+#        ceilometer_notification: docker.io/kolla/ubuntu-source-ceilometer-notification:ocata
+    endpoints:
+      oslo_messaging:
+        auth:
+          admin:
+            username: ceilometer-rabbitmq-admin
+            password: password
+          ceilometer:
+            username: ceilometer-rabbitmq-user
+            password: password
+        hosts:
+          default: ceilometer-rabbitmq
+      oslo_db:
+        auth:
+          admin:
+            password: password
+          ceilometer:
+            password: password
+      mongodb:
+        auth:
+          admin:
+            password: password
+          ceilometer:
+            password: password
+    labels:
+      server:
+        node_selector_key: openstack-control-plane
+        node_selector_value: enabled
+  source:
+    type: local
+    location: /home/ubuntu/openstack-helm/
+    subpath: ceilometer
+    reference: master
+  dependencies:
+    - helm-toolkit
+---
+schema: armada/ChartGroup/v1
+metadata:
+  schema: metadata/Document/v1
+  name: openstack-ceilometer-services
+data:
+  description: "Openstack ceilometer Services"
+  sequenced: True
+  chart_group:
+    - postgresql
+---
+schema: armada/ChartGroup/v1
+metadata:
+  schema: metadata/Document/v1
+  name: openstack-ceilometer-services2
+data:
+  description: "Openstack ceilometer Services"
+  sequenced: True
+  chart_group:
+    - gnocchi
+---
+schema: armada/ChartGroup/v1
+metadata:
+  schema: metadata/Document/v1
+  name: openstack-ceilometer-services3
+data:
+  description: "Openstack ceilometer Services"
+  sequenced: True
+  chart_group:
+    - mongodb
+---
+schema: armada/ChartGroup/v1
+metadata:
+  schema: metadata/Document/v1
+  name: openstack-ceilometer-services4
+data:
+  description: "Openstack ceilometer Services"
+  sequenced: True
+  chart_group:
+    - ceilometer-rabbitmq
+    - ceilometer
+---
+schema: armada/Manifest/v1
+metadata:
+  schema: metadata/Document/v1
+  name: taco-manifest
+data:
+  release_prefix: ceilo
+  chart_groups:
+    - openstack-ceilometer-services
+    - openstack-ceilometer-services2
+    - openstack-ceilometer-services3
+    - openstack-ceilometer-services4
