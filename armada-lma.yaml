@@ -10,7 +10,7 @@ data:
   values: {}
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: helm-toolkit
     reference: master
   dependencies: []
@@ -41,7 +41,7 @@ data:
         ingress: 2
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: ingress
     reference: master
   dependencies:
@@ -102,7 +102,7 @@ data:
         enabled: True
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: ceph-client
     reference: master 
   dependencies:
@@ -136,7 +136,7 @@ data:
       enabled: true
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: ldap
     reference: master
   dependencies:
@@ -178,7 +178,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: mariadb
     reference: master
   dependencies:
@@ -230,7 +230,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: elasticsearch
     reference: master
   dependencies:
@@ -279,7 +279,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: fluent-logging
     reference: master
   dependencies:
@@ -325,7 +325,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: kibana
     reference: master
   dependencies:
@@ -363,7 +363,7 @@ data:
         prometheus: 2
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: prometheus
     reference: master
   dependencies:
@@ -395,7 +395,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: prometheus-kube-state-metrics
     reference: master
   dependencies:
@@ -427,7 +427,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: prometheus-node-exporter
     reference: master
   dependencies:
@@ -462,7 +462,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: prometheus-alertmanager
     reference: master
   dependencies:
@@ -518,7 +518,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: grafana
     reference: master
   dependencies:

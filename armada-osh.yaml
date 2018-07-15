@@ -10,7 +10,7 @@ data:
   values: {}
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: helm-toolkit
     reference: master
   dependencies: []
@@ -45,7 +45,7 @@ data:
         ingress: 2
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: ingress
     reference: master
   dependencies:
@@ -106,7 +106,7 @@ data:
         enabled: true
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: ceph-client
     reference: master
   dependencies:
@@ -146,7 +146,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: mariadb
     reference: master
   dependencies:
@@ -181,7 +181,7 @@ data:
         enabled: true
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: memcached
     reference: master
   dependencies:
@@ -227,7 +227,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: rabbitmq
     reference: master
   dependencies:
@@ -329,7 +329,7 @@ data:
         api: 2
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: keystone
     reference: master
   dependencies:
@@ -403,7 +403,7 @@ data:
       rgw_keystone_user_and_endpoints: True
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: ceph-client
     reference: master
   dependencies:
@@ -449,7 +449,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: rabbitmq
     reference: master
   dependencies:
@@ -553,7 +553,7 @@ data:
     storage: radosgw
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: glance
     reference: master
   dependencies:
@@ -599,7 +599,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: rabbitmq
     reference: master
   dependencies:
@@ -717,7 +717,7 @@ data:
           backup_driver: cinder.backup.drivers.swift
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: cinder
     reference: master
   dependencies:
@@ -746,7 +746,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: openvswitch
     reference: master
   dependencies:
@@ -772,7 +772,7 @@ data:
           node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: libvirt
     reference: master
   dependencies:
@@ -818,7 +818,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: rabbitmq
     reference: master
   dependencies:
@@ -1013,7 +1013,7 @@ data:
           cpu_mode: none
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: nova
     reference: master
   dependencies:
@@ -1059,7 +1059,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: rabbitmq
     reference: master
   dependencies:
@@ -1202,7 +1202,7 @@ data:
             bridge_mappings: public:br-ex
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: neutron
     reference: master
   dependencies:
@@ -1248,7 +1248,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: rabbitmq
     reference: master
   dependencies:
@@ -1363,7 +1363,7 @@ data:
         engine: 2
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: heat
     reference: master
   dependencies:
@@ -1421,7 +1421,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: rabbitmq
     reference: master
   dependencies:
@@ -1504,7 +1504,7 @@ data:
         api: 2
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: barbican
     reference: master
   dependencies:
@@ -1545,7 +1545,7 @@ data:
       node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: prometheus-openstack-exporter
     reference: master
   dependencies:

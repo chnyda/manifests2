@@ -10,7 +10,7 @@ data:
   values: {}
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: helm-toolkit
     reference: master
   dependencies: []
@@ -48,7 +48,7 @@ data:
             node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm/
+    location: /tmp/openstack-helm/
     subpath: postgresql
     reference: master
   dependencies:
@@ -109,7 +109,7 @@ data:
              node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm/
+    location: /tmp/openstack-helm/
     subpath: gnocchi
     reference: master
   dependencies:
@@ -146,7 +146,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm/
+    location: /tmp/openstack-helm/
     subpath: mongodb
     reference: master
   dependencies:
@@ -192,7 +192,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm/
+    location: /tmp/openstack-helm/
     subpath: rabbitmq
     reference: master
   dependencies:
@@ -260,7 +260,7 @@ data:
         node_selector_value: enabled
   source:
     type: local
-    location: /home/ubuntu/openstack-helm/
+    location: /tmp/openstack-helm/
     subpath: ceilometer
     reference: master
   dependencies:

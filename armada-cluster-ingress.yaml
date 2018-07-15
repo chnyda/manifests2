@@ -10,7 +10,7 @@ data:
   values: {}
   source:
     type: local
-    location: /home/ubuntu/openstack-helm-infra
+    location: /tmp/openstack-helm-infra
     subpath: helm-toolkit
     reference: master
   dependencies: []
@@ -49,7 +49,7 @@ data:
       host_namespace: true
   source:
     type: local
-    location: /home/ubuntu/openstack-helm
+    location: /tmp/openstack-helm
     subpath: ingress
     reference: master
   dependencies:
